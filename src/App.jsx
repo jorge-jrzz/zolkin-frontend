@@ -1,13 +1,13 @@
 import React from 'react';
-import Sidebar from "./components/Sidebar/Sidebar.jsx";
-import Main from "./components/Main/Main.jsx";
+import Sidebar from "./components/sidebar/Sidebar.jsx";
+import Chat from "./components/chat/Chat.jsx";
 
 
 const App = () => {
     return (
         <>
             <Sidebar/>
-            <Main/>
+            <Chat/>
         </>
     )
 }

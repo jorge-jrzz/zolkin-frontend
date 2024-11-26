@@ -36,7 +36,7 @@ body {
 }
 
 .main .greet span {
-    background: -webkit-linear-gradient(16deg, #4b90ff, #ff5546);
+    background: -webkit-linear-gradient(16deg, #00F261, #0062FF);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -157,35 +157,35 @@ body {
     background-color: #e8eaed;
 }
 
-.result {
+.message {
     padding: 0 max(5%, 1rem);
     max-height: 70vh;
     overflow-y: scroll;
 }
 
-.result::-webkit-scrollbar {
+.message::-webkit-scrollbar {
     display: none;
 }
 
-.result-title {
+.message-header {
     margin: 40px 0;
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-.result-title p {
+.message-header p {
     word-break: break-all;
 }
 
-.result img {
+.message img {
     width: 40px;
     border-radius: 50%;
 }
 
-.result-data {
+.message-content {
     display: flex;
-    align-items: start;
+    /* align-items: start; */
     gap: 20px;
 }
 
@@ -199,7 +199,7 @@ body {
 .loader hr {
     border-radius: 4px;
     border: none;
-    background: #f6f7f8 linear-gradient(to right, #9ed7ff, #ffffff, #9ed7ff);
+    background: #f6f7f8 linear-gradient(to right, #80b0ff, #ffffff, #80b0ff);
     background-size: 800px 50px;
     height: 20px;
     animation: loader 3s infinite linear;
@@ -215,7 +215,7 @@ body {
     }
 }
 
-.result-data > p {
+.message-content > p {
     font-size: 17px;
     font-weight: 300;
     line-height: 1.8;
@@ -280,11 +280,11 @@ body {
         line-height: 1.1;
     }
 
-    .result-data-icon {
+    .message-content-icon {
         display: none;
     }
 
-    .result-data > p {
+    .message-content > p {
         margin-bottom: 30vh;
     }
 }

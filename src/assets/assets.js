@@ -9,6 +9,7 @@ import calendar_icon from './calendar_icon.png'
 import send_icon from './send_icon.png'
 import zolkin_icon from './zolkin_icon.png'
 import conversation_icon from './conversation_icon.png'
+import upload_file_icon from './upload_file_icon.png'
 
 export const assets = {
     menu_icon,
@@ -21,5 +22,6 @@ export const assets = {
     calendar_icon,
     send_icon,
     zolkin_icon, 
-    conversation_icon
+    conversation_icon, 
+    upload_file_icon
 }

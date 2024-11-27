@@ -1,7 +1,9 @@
 import React, {useContext, useEffect, useRef, useState} from 'react';
-import './chat.css';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import {assets} from "../../assets/assets.js";
 import {Context} from "../../context/Context.jsx";
+import './Chat.css';
 
 const Chat = () => {
     const {
@@ -44,21 +46,24 @@ const Chat = () => {
 
     // Renderizar un mensaje individual
     const renderMessage = (message, index) => {
-        return (
-            <div key={index} className={`message ${message.isUser ? 'user-message' : 'bot-message'}`} ref={resultRef}>
-                <div className="message-header">
-                    <img 
-                        src={message.isUser ? assets.user_icon : assets.zolkin_icon} 
-                        alt={message.isUser ? "Usuario" : "Bot"}
-                    />
-                    {message.isUser && <p>{message.content}</p>}
-                    {!message.isUser && (
-                        <p dangerouslySetInnerHTML={{__html: message.content}}></p>
-                    )}
-                </div>
+    return (
+        <div key={index} className={`message ${message.isUser ? 'user-message' : 'bot-message'}`} ref={resultRef}>
+            <div className="message-header">
+                <img 
+                    src={message.isUser ? assets.user_icon : assets.zolkin_icon} 
+                    alt={message.isUser ? "Usuario" : "Bot"}
+                />
+                {message.isUser ? (
+                    <p>{message.content}</p>
+                ) : (
+                    <ReactMarkdown className={'bot-content'} rehypePlugins={[remarkGfm]}>
+                        {message.content}
+                    </ReactMarkdown>
+                )}
             </div>
-        );
-    };
+        </div>
+    );
+};
 
     return (
         <main className="main">

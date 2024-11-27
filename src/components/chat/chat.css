@@ -168,15 +168,21 @@ body {
 }
 
 .message-header {
-    margin: 40px 0;
+    margin: 20px 0;
     display: flex;
-    align-items: center;
+    align-items: start;
     gap: 20px;
 }
 
-.message-header p {
-    word-break: break-all;
+.bot-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
+
+/* .message-header p {
+    word-break: break-all;
+} */
 
 .message img {
     width: 40px;
@@ -185,6 +191,7 @@ body {
 
 .message-content {
     display: flex;
+    flex-direction: column;
     /* align-items: start; */
     gap: 20px;
 }

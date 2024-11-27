@@ -159,3 +159,17 @@
     white-space: nowrap;
     overflow: hidden;
 }
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(190, 190, 190, 0.3); /* Fondo semi-transparente */
+    backdrop-filter: blur(8px); /* Efecto de blur */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* Asegura que el modal esté por encima de otros elementos */
+}

@@ -11,15 +11,98 @@ const ContextProvider = (props) => {
     const [loading, setLoading] = useState(false);
     const [resultData, setResultData] = useState("");
     
-    // Nuevo estado para manejar las conversaciones
+    // Estado para manejar las conversaciones
     const [conversations, setConversations] = useState([]);
     const [currentConversationId, setCurrentConversationId] = useState(null);
 
-    const delayPara = (index, nextWord) => {
-        setTimeout(function () {
-            setResultData(prev => prev + nextWord)
-        }, 75 * index);
+    const addMessageToCurrentConversation = (message, isUser = true, conversationId = null) => {
+        let convId = conversationId || currentConversationId;
+        if (!convId) {
+            // Si no hay conversación activa, crear una nueva
+            const newConversationId = Date.now().toString();
+            setConversations(prev => [...prev, {
+                id: newConversationId,
+                messages: []
+            }]);
+            setCurrentConversationId(newConversationId);
+            convId = newConversationId;  // Usar el nuevo ID de conversación
+        }
+        
+        setConversations(prev => prev.map(conv => {
+            if (conv.id === convId) {
+                return {
+                    ...conv,
+                    messages: [...conv.messages, {
+                        content: message,
+                        isUser,
+                        timestamp: new Date().toISOString()
+                    }]
+                };
+            }
+            return conv;
+        }));
+        return convId;
     }
+
+    const onSent = async (prompt) => {
+        setResultData("");
+        setLoading(true);
+        setShowResult(true);
+        setInput("");
+        let response;
+    
+        const messageToSend = prompt !== undefined ? prompt : input;
+    
+        // Agregar mensaje del usuario a la conversación actual
+        const conversationId = addMessageToCurrentConversation(messageToSend, true);
+    
+        if (prompt === undefined) {
+            setPrevPrompts(prev => [...prev, input]);
+            setRecentPrompt(input);
+        } else {
+            setRecentPrompt(prompt);
+        }
+    
+        // Obtener respuesta
+        response = await runChat(messageToSend);
+    
+        // Evitar formatear la respuesta como HTML y manejarla directamente como Markdown
+        const responseMarkdown = response;
+
+        setLoading(false);
+    
+        // Mostrar la respuesta gradualmente
+        const responseArray = responseMarkdown.split(" ");
+        addMessageToCurrentConversation("", false, conversationId);
+    
+        const displayResponse = async (wordsArray) => {
+            for (let i = 0; i < wordsArray.length; i++) {
+                await new Promise(resolve => setTimeout(resolve, 75));
+                const nextWord = wordsArray[i] + " ";
+    
+                setResultData(prev => prev + nextWord);
+    
+                // Actualizar el último mensaje en la conversación
+                setConversations(prevConversations => prevConversations.map(conv => {
+                    if (conv.id === conversationId) {
+                        const updatedMessages = [...conv.messages];
+                        const lastIndex = updatedMessages.length - 1;
+                        updatedMessages[lastIndex] = {
+                            ...updatedMessages[lastIndex],
+                            content: (updatedMessages[lastIndex].content || "") + nextWord
+                        };
+                        return {
+                            ...conv,
+                            messages: updatedMessages
+                        };
+                    }
+                    return conv;
+                }));
+            }
+        };
+    
+        await displayResponse(responseArray);
+    };
 
     const newChat = () => {
         // Crear nueva conversación con ID único
@@ -34,74 +117,6 @@ const ContextProvider = (props) => {
         setResultData("");
         setInput("");
         setPrevPrompts([]);
-    }
-
-    const addMessageToCurrentConversation = (message, isUser = true) => {
-        if (!currentConversationId) {
-            // Si no hay conversación activa, crear una nueva
-            newChat();
-        }
-        
-        setConversations(prev => prev.map(conv => {
-            if (conv.id === currentConversationId) {
-                return {
-                    ...conv,
-                    messages: [...conv.messages, {
-                        content: message,
-                        isUser,
-                        timestamp: new Date().toISOString()
-                    }]
-                };
-            }
-            return conv;
-        }));
-    }
-
-    const onSent = async (prompt) => {
-        setResultData("");
-        setLoading(true);
-        setShowResult(true);
-        let response;
-
-        const messageToSend = prompt !== undefined ? prompt : input;
-        
-        // Agregar mensaje del usuario a la conversación actual
-        addMessageToCurrentConversation(messageToSend, true);
-        
-        if (prompt === undefined) {
-            setPrevPrompts(prev => [...prev, input]);
-            setRecentPrompt(input);
-        } else {
-            setRecentPrompt(prompt);
-        }
-
-        // Obtener respuesta
-        response = await runChat(messageToSend);
-
-        // Formatear respuesta
-        let responseArray = response.split("**");
-        let newResponse = "";
-        for (let i = 0; i < responseArray.length; i++) {
-            if (i === 0 || i % 2 !== 1) {
-                newResponse += responseArray[i];
-            } else {
-                newResponse += "<b>" + responseArray[i] + "</b>"
-            }
-        }
-        
-        let newResponse2 = newResponse.split("*").join("</br>");
-        let newResponseArray = newResponse2.split(" ");
-        
-        
-        for (let i = 0; i < newResponseArray.length; i++) {
-            const nextWord = newResponseArray[i];
-            delayPara(i, nextWord + " ");
-        }
-        // Agregar respuesta del bot a la conversación actual
-        addMessageToCurrentConversation(newResponse2, false);
-        
-        setLoading(false);
-        setInput("");
     }
 
     const loadConversation = (conversationId) => {

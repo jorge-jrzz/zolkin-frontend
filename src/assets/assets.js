@@ -10,6 +10,8 @@ import send_icon from './send_icon.png'
 import zolkin_icon from './zolkin_icon.png'
 import conversation_icon from './conversation_icon.png'
 import upload_file_icon from './upload_file_icon.png'
+import google_icon from './google_icon.png'
+import openai_icon from './openai_icon.png'
 
 export const assets = {
     menu_icon,
@@ -23,5 +25,7 @@ export const assets = {
     send_icon,
     zolkin_icon, 
     conversation_icon, 
-    upload_file_icon
+    upload_file_icon, 
+    google_icon,
+    openai_icon
 }

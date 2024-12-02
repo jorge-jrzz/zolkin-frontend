@@ -1,18 +1,23 @@
 import React, { useState } from "react";
+import axios from "axios";
 import './FileUploader.css';
 
-const FileUploader = () => {
+const FileUploader = ({onUploadSuccess}) => {
   // Hook para manejar el estado del nombre del archivo
   const [fileName, setFileName] = useState("");
   const [isDragging, setIsDragging] = useState(false);
+  const [file, setFile] = useState(null);
+  const [newFilename, setNewFilename] = useState("");
 
   // Manejador de eventos para cuando se selecciona un archivo
   const handleFileChange = (event) => {
     const files = event.target.files;
     if (files.length > 0) {
       setFileName(files[0].name); // Obtener el nombre del primer archivo seleccionado
+      setFile(files[0]); // Guardar el archivo en el estado
     } else {
       setFileName(""); // Si no hay archivo seleccionado, limpiar el nombre
+      setFile(null);
     }
   };
 
@@ -39,16 +44,45 @@ const FileUploader = () => {
     const files = event.dataTransfer.files;
     if (files.length > 0) {
       setFileName(files[0].name);
+      setFile(files[0]); // Guardar el archivo en el estado
       // Además, se podría actualizar el input para que coincida con los archivos seleccionados
       const inputElement = document.getElementById("fileInput");
       inputElement.files = files;
     }
   };
 
+  // Manejador de eventos para enviar el archivo al backend
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (!file || !newFilename) {
+      alert("Por favor, selecciona un archivo y proporciona una descripción.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file); // Agregar el archivo
+    formData.append("filename", newFilename); // Agregar la descripción
+
+    try {
+      const response = await axios.post("http://127.0.0.1:5002/upload_file/", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      console.log("Archivo subido exitosamente:", response.data);
+      onUploadSuccess();
+      alert("Archivo subido exitosamente");
+    } catch (error) {
+      console.error("Error al subir el archivo:", error);
+      alert("Hubo un error al subir el archivo.");
+    }
+  };
+
   return (
     <div className="card-file-uploader">
       <span className="title">Carga archivos a Zolkin</span>
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <div
           className={`file-upload-container ${isDragging ? "dragging" : ""}`}
           onDragOver={handleDragOver} // Evento para cuando se arrastra un archivo sobre el contenedor
@@ -78,11 +112,17 @@ const FileUploader = () => {
         {fileName && (
           <>
             <p id="help-text">
-              ¿Sobre qué es el archivo <strong>{fileName}</strong>?
+              Ingresa un nuevo nombre descriptivo al archivo <strong>{fileName}</strong>
             </p>
             <div className="group">
-              <input placeholder="" type="text" required />
-              <label htmlFor="name">Descripción</label>
+              <input 
+                type="text" 
+                value={newFilename}
+                onChange={(e) => setNewFilename(e.target.value)}
+                placeholder="" 
+                required 
+              />
+              <label htmlFor="name">Nuevo nombre</label>
             </div>
             <button type="submit">Cargar</button>
           </>

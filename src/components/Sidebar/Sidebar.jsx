@@ -108,7 +108,7 @@ const Sidebar = () => {
             {showForm && (
                 <div className="modal" onClick={toggleForm}>
                     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                        <FileUploader />
+                        <FileUploader onUploadSuccess={() => setShowForm(false)} />
                     </div>
                 </div>
             )}

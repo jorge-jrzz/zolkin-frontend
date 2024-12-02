@@ -22,6 +22,17 @@ const Chat = () => {
     const resultRef = useRef(null);
     const [rows, setRows] = useState(1);
 
+    const [userData, setUserData] = useState(null);
+    useEffect(() => {
+        axios.get('http://localhost:5002/user_info/')
+        .then(response => {
+            setUserData(response.data); // Guardar los datos en el estado
+        })
+        .catch(error => {
+            console.error('Error al obtener los datos:', error);
+        });
+    }, []);
+
     useEffect(() => {
         const updateRows = () => {
             if (window.innerWidth <= 600) {
@@ -51,8 +62,13 @@ const Chat = () => {
             <div key={index} className={`message ${message.isUser ? 'user-message' : 'bot-message'}`} ref={resultRef}>
                 <div className="message-header">
                     <img 
-                        src={message.isUser ? assets.user_icon : assets.zolkin_icon} 
-                        alt={message.isUser ? "Usuario" : "Bot"}
+                        // src={message.isUser ? assets.user_icon : assets.zolkin_icon} 
+                        src={
+                            message.isUser ?
+                                userData ? userData.picture : assets.user_icon
+                                : assets.zolkin_icon
+                        }
+                        alt={message.isUser ? "User" : "Bot"}
                     />
                     {message.isUser ? (
                         <p>{message.content}</p>
@@ -66,22 +82,11 @@ const Chat = () => {
         );
     };
 
-    const [userData, setUserData] = useState(null);
-    useEffect(() => {
-        axios.get('http://localhost:5002/user_info/')
-        .then(response => {
-            setUserData(response.data); // Guardar los datos en el estado
-        })
-        .catch(error => {
-            console.error('Error al obtener los datos:', error);
-        });
-    }, []);
-
     return (
         <main className="main">
             <nav className="nav">
                 <p>Zolkin</p>
-                <img src={assets.user_icon} alt=""/>
+                <img src={userData ? userData.picture: assets.user_icon} alt=""/>
             </nav>
             <div className="main-container">
                 {!showResult ? (

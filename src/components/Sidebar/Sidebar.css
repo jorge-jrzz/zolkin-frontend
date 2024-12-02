@@ -51,8 +51,8 @@
     align-items: center;
 }
 
-.sidebar .new-chat {
-    margin-top: 50px;
+.sidebar .side-option {
+    margin-top: 10px;
     display: inline-flex;
     align-items: center;
     gap: 10px;
@@ -64,13 +64,17 @@
     cursor: pointer;
 }
 
-.new-chat:hover {
+.side-option:hover {
     background-color: #e0e0e5;
 }
 
-.new-chat {
+.side-option {
     justify-content: center;
-    width: max-content;
+    width: 90%;
+}
+
+.sidebar #upload-file {
+    margin-top: 60px;
 }
 
 .sidebar .recent-title {
@@ -154,4 +158,18 @@
 .recent-entry-p {
     white-space: nowrap;
     overflow: hidden;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(190, 190, 190, 0.3); /* Fondo semi-transparente */
+    backdrop-filter: blur(8px); /* Efecto de blur */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* Asegura que el modal esté por encima de otros elementos */
 }

@@ -20,7 +20,7 @@ const LoginCard = () => {
         <img className="App-logo" src={assets.zolkin_icon} alt=""></img>
         <div className="welcome-text">
           <center>
-            <span className="welcometo">Vienvenido a</span> <br />{" "}
+            <span className="welcometo">Bienvenido a</span> <br />{" "}
             <span className="zolkin">Zolkin</span>
             <p className="login-text">Controla más con menos</p>
           </center>

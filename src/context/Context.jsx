@@ -1,5 +1,5 @@
 import {createContext, useState} from "react";
-import runChat from "../config/chatgpt";
+import getChatResponse from "../config/zolkin";
 
 export const Context = createContext();
 
@@ -55,6 +55,9 @@ const ContextProvider = (props) => {
     
         // Agregar mensaje del usuario a la conversación actual
         const conversationId = addMessageToCurrentConversation(messageToSend, true);
+
+        console.log("Prompt:", messageToSend);
+        console.log("ID de conversación:", conversationId);
     
         if (prompt === undefined) {
             setPrevPrompts(prev => [...prev, input]);
@@ -64,7 +67,7 @@ const ContextProvider = (props) => {
         }
     
         // Obtener respuesta
-        response = await runChat(messageToSend);
+        response = await getChatResponse(messageToSend, conversationId);
     
         // Evitar formatear la respuesta como HTML y manejarla directamente como Markdown
         const responseMarkdown = response;

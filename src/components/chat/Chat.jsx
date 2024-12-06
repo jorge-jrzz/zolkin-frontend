@@ -92,7 +92,7 @@ const Chat = () => {
                 {!showResult ? (
                     <>
                         <div className="greet">
-                            <p><span>Hello, {userData ? userData.name : 'Human'}</span></p>
+                            <p><span>Hola, {userData ? userData.name : 'Human'}</span></p>
                             <p>¿Cómo puedo ayudarte hoy?</p>
                         </div>
                         <div className="cards">

@@ -91,7 +91,6 @@ body {
     padding: 10px 20px 0 20px;
     margin: auto;
     background-color: white;
-    box-shadow: #ffffff 0 -20px 50px;
 }
 
 .search-box {
@@ -159,8 +158,9 @@ body {
 
 .message {
     padding: 0 max(5%, 1rem);
-    max-height: 70vh;
+    max-height: 80vh;
     overflow-y: scroll;
+    margin-bottom: 2px;
 }
 
 .message::-webkit-scrollbar {
@@ -180,10 +180,6 @@ body {
     gap: 20px;
 }
 
-/* .message-header p {
-    word-break: break-all;
-} */
-
 .message img {
     width: 40px;
     border-radius: 50%;
@@ -192,7 +188,6 @@ body {
 .message-content {
     display: flex;
     flex-direction: column;
-    /* align-items: start; */
     gap: 20px;
 }
 

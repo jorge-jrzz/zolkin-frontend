@@ -59,7 +59,7 @@ const Chat = () => {
     // Renderizar un mensaje individual
     const renderMessage = (message, index) => {
         return (
-            <div key={index} className={`message ${message.isUser ? 'user-message' : 'bot-message'}`} ref={resultRef}>
+            <div key={index} className={`${message.isUser ? 'user-message' : 'bot-message'}`} ref={resultRef}>
                 <div className="message-header">
                     <img 
                         // src={message.isUser ? assets.user_icon : assets.zolkin_icon} 
@@ -107,8 +107,8 @@ const Chat = () => {
                                 <img src={assets.rag_icon} alt=""/>
                             </div>
                             <div className="card"
-                                 onClick={() => setInput("Crear un borrador en Gmail para invitar a mis amigos a tomar un café.")}>
-                                <p>Crear un borrador en Gmail para invitar a mis amigos a tomar un café.</p>
+                                 onClick={() => setInput("Redacta un borrador en Gmail para informarle a mi asesor que la reunión programada para hoy no será posible.")}>
+                                <p>Redacta un borrador en Gmail para informarle a mi asesor que la reunión programada para hoy no será posible.</p>
                                 <img src={assets.mail_icon} alt=""/>
                             </div>
                             <div className="card" 

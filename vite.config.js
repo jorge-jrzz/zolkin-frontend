@@ -5,7 +5,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
   return {
     define: {
-      'process.env.OPENAI_API_KEY': JSON.stringify(env.OPENAI_API_KEY)
+      'process.env.BACKEND_URL': JSON.stringify(env.BACKEND_URL),
     },
     plugins: [react()],
     build: {
@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => {
     },
     server: {
       port: 3000, // Puerto del servidor local
-      open: true, // Abrir en el navegador al iniciar
+      open: false,
     },
     resolve: {
       alias: {

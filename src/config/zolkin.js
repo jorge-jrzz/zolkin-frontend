@@ -1,4 +1,6 @@
 import axios from 'axios';
+axios.defaults.withCredentials = true;
+
 
 /**
  * Función asíncrona para realizar una solicitud GET a la API.
@@ -7,18 +9,16 @@ import axios from 'axios';
  * @returns {Promise<string>} - La respuesta desde la API.
  */
 const getChatResponse = async (prompt, thread_id) => {
+    const backend_url = process.env.BACKEND_URL;
     try {
-        // Construir la URL con los parámetros necesarios
-        const url = `http://localhost:5002/chat/`;
-        
         // Realizar la solicitud GET con Axios
-        const response = await axios.get(url, {
+        const response = await axios.get(`${backend_url}/chat/`, {
+            withCredentials: true,
             params: {
                 prompt: prompt,
                 thread_id: thread_id
             }
         });
-        
         // Retornar solo la respuesta contenida en el JSON
         return response.data.response;
     } catch (error) {

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import './FileUploader.css';
+axios.defaults.withCredentials = true;
 
 const FileUploader = ({onUploadSuccess}) => {
   // Hook para manejar el estado del nombre del archivo
@@ -8,6 +9,8 @@ const FileUploader = ({onUploadSuccess}) => {
   const [isDragging, setIsDragging] = useState(false);
   const [file, setFile] = useState(null);
   const [newFilename, setNewFilename] = useState("");
+
+  const backend_url = process.env.BACKEND_URL;
 
   // Manejador de eventos para cuando se selecciona un archivo
   const handleFileChange = (event) => {
@@ -64,11 +67,13 @@ const FileUploader = ({onUploadSuccess}) => {
     formData.append("filename", newFilename); // Agregar la descripción
 
     try {
-      const response = await axios.post("http://127.0.0.1:5002/upload_file/", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.post(`${backend_url}/upload_file/`, 
+        formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          withCredentials: true,
+        });
 
       console.log("Archivo subido exitosamente:", response.data);
       onUploadSuccess();

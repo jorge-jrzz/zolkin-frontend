@@ -5,6 +5,7 @@ import axios from 'axios';
 import {assets} from "../../assets/assets.js";
 import {Context} from "../../context/Context.jsx";
 import './Chat.css';
+axios.defaults.withCredentials = true;
 
 const Chat = () => {
     const {
@@ -23,8 +24,9 @@ const Chat = () => {
     const [rows, setRows] = useState(1);
 
     const [userData, setUserData] = useState(null);
+    const backend_url = process.env.BACKEND_URL;
     useEffect(() => {
-        axios.get('http://localhost:5002/user_info/')
+        axios.get(`${backend_url}/user_info/`, { withCredentials: true})
         .then(response => {
             setUserData(response.data); // Guardar los datos en el estado
         })

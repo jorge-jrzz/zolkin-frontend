@@ -26,21 +26,17 @@ const HomePage = () => {
                 <br />
                 <h3 className="">
                   <mark className="highlight-gray">
-                    <strong>
                       Imagina una solución que simplifica la creación y gestión
                       de eventos en Google Calendar, mientras optimiza el envío
                       de correos en Gmail.
-                    </strong>
                   </mark>
                 </h3>
                 <h3 className="">
                   <mark className="highlight-gray">
-                    <strong>
                       Con Zolkin, todo comienza con tus palabras. Convierte tus
                       ideas en acción de manera rápida, sencilla y eficiente.
                       ¡Descubre cómo puedes transformar tus tareas diarias en
                       resultados sorprendentes!
-                    </strong>
                   </mark>
                 </h3>
                 <br />
@@ -105,7 +101,7 @@ const HomePage = () => {
                   </div>
                   <div style={{ width: "93.75%" }} className="column">
                     <h3>
-                      <mark className="highlight-gray">
+                      <mark className="highlight-default">
                         Incluye una potente tecnología de Recuperación de
                         Información Generativa (RAG) que combina datos en tiempo
                         real con generación de texto precisa, asegurando
@@ -127,7 +123,7 @@ const HomePage = () => {
                   </div>
                   <div style={{ width: "100%" }} className="column">
                     <h3>
-                      <mark className="highlight-gray">
+                      <mark className="highlight-default">
                         Ofrece una integración directa con Gmail para gestionar
                         correos electrónicos, automatizar respuestas y optimizar
                         la comunicación desde una interfaz conversacional
@@ -150,7 +146,7 @@ const HomePage = () => {
                   </div>
                   <div style={{ width: "100%" }} className="column">
                     <h3>
-                      <mark className="highlight-gray">
+                      <mark className="highlight-default">
                         Facilita la programación y gestión de eventos a través
                         de su integración con Google Calendar, permitiendo a los
                         usuarios crear recordatorios y organizar su tiempo de
@@ -172,7 +168,7 @@ const HomePage = () => {
                   </div>
                   <div style={{ width: "100%" }} className="column">
                     <h3>
-                      <mark className="highlight-gray">
+                      <mark className="highlight-default">
                         Incorpora memoria contextual para cada conversación,
                         garantizando interacciones personalizadas al recordar
                         temas discutidos previamente y responder con mayor

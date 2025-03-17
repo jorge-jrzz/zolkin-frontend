@@ -3,8 +3,9 @@ import styled from "styled-components";
 import { assets } from "../../assets/assets.js";
 
 const InitCard = () => {
+  const backend_url = process.env.BACKEND_URL;
   const loginWithGoogle = () => {
-    window.location.href = "http://localhost:5002/google/";
+    window.location.href = `${backend_url}/google/`;
   };
 
   return (

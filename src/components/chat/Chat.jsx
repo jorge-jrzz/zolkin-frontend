@@ -126,7 +126,7 @@ const Chat = () => {
                             renderMessage(message, index)
                         )}
                         {loading && (
-                            <div className="message bot-message">
+                            <div className="bot-message">
                                 <div className="message-header">
                                     <img className='message-content-icon' src={assets.zolkin_icon} alt="Bot"/>
                                     <div className='loader'>

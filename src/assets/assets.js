@@ -6,6 +6,8 @@ import compass_icon from './compass_icon.png'
 import user_icon from './user_icon.png'
 import mail_icon from './mail_icon.png'
 import calendar_icon from './calendar_icon.png'
+import vector_icon from './vector_icon.png'
+import vector_icon_blue from './vector_icon_blue.png'
 import send_icon from './send_icon.png'
 import zolkin_icon from './zolkin_icon.png'
 import conversation_icon from './conversation_icon.png'
@@ -23,6 +25,8 @@ export const assets = {
     mail_icon,
     calendar_icon,
     send_icon,
+    vector_icon,
+    vector_icon_blue,
     zolkin_icon, 
     conversation_icon, 
     upload_file_icon, 

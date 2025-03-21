@@ -8,7 +8,7 @@ axios.defaults.withCredentials = true;
  * @param {string} conversationId - El ID de la conversación.
  * @returns {Promise<string>} - La respuesta desde la API.
  */
-const getChatResponse = async (prompt, thread_id) => {
+const getChatResponse = async (prompt, thread_id, use_rag) => {
     const backend_url = process.env.BACKEND_URL;
     try {
         // Realizar la solicitud GET con Axios
@@ -16,7 +16,8 @@ const getChatResponse = async (prompt, thread_id) => {
             withCredentials: true,
             params: {
                 prompt: prompt,
-                thread_id: thread_id
+                thread_id: thread_id,
+                use_rag: use_rag
             }
         });
         // Retornar solo la respuesta contenida en el JSON

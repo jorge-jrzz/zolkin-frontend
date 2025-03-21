@@ -24,6 +24,7 @@ const Chat = () => {
     const [rows, setRows] = useState(1);
 
     const [userData, setUserData] = useState(null);
+    const [ragMode, setRagMode] = useState(false);
     const backend_url = process.env.BACKEND_URL;
     useEffect(() => {
         axios.get(`${backend_url}/user_info/`, { withCredentials: true})
@@ -141,13 +142,27 @@ const Chat = () => {
                 )}
                 <div className="main-bottom">
                     <div className="search-box">
+                        <div 
+                        id='rag-mode'
+                        className={`${ragMode ? 'active' : ''}`} 
+                        onClick={() => setRagMode(prev => !prev)}
+                        >
+                            {ragMode ? (
+                                <>
+                                <img src={assets.vector_icon_blue} alt="vector blue"/>
+                                <p>Herramienta RAG</p>
+                                </>
+                            ) : (
+                                <img src={assets.vector_icon} alt="vector"/>
+                            )}
+                        </div>
                         <textarea 
                             rows={rows} 
                             onChange={(e) => setInput(e.target.value)}
                             onKeyUp={(e) => {
                                 if (input.trim() !== "" && e.key === 'Enter') {
                                     e.preventDefault();
-                                    onSent();
+                                    onSent(undefined, ragMode)
                                 }
                             }}
                             value={input}
@@ -158,7 +173,7 @@ const Chat = () => {
                                 type="submit" 
                                 onClick={() => {
                                     if (input.trim() !== "") {
-                                        onSent()
+                                        onSent(undefined, ragMode)
                                     }
                                 }}>
                                 <img src={assets.send_icon} alt=""/>

@@ -129,6 +129,21 @@ body {
     gap: 10px;
 }
 
+#rag-mode {
+    gap: 10px;
+    padding: 10px;
+    background-color: #e6eaf1;
+    border-radius: 50px;
+    font-size: 14px;
+    color: #505050;
+    cursor: pointer;
+}
+
+#rag-mode.active {
+    background-color: #daeeff;
+    color: #0285FF;
+}
+
 .main .bottom-info {
     font-size: 13px;
     margin: 15px auto;

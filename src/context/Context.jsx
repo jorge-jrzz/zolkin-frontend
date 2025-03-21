@@ -44,7 +44,7 @@ const ContextProvider = (props) => {
         return convId;
     }
 
-    const onSent = async (prompt) => {
+    const onSent = async (prompt, useRag) => {
         setResultData("");
         setLoading(true);
         setShowResult(true);
@@ -58,6 +58,7 @@ const ContextProvider = (props) => {
 
         console.log("Prompt:", messageToSend);
         console.log("ID de conversación:", conversationId);
+        console.log("Usar RAG:", useRag);
     
         if (prompt === undefined) {
             setPrevPrompts(prev => [...prev, input]);
@@ -67,7 +68,7 @@ const ContextProvider = (props) => {
         }
     
         // Obtener respuesta
-        response = await getChatResponse(messageToSend, conversationId);
+        response = await getChatResponse(messageToSend, conversationId, useRag);
     
         // Evitar formatear la respuesta como HTML y manejarla directamente como Markdown
         const responseMarkdown = response;

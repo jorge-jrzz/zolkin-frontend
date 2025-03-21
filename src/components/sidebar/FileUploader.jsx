@@ -124,10 +124,9 @@ const FileUploader = ({onUploadSuccess}) => {
                 type="text" 
                 value={newFilename}
                 onChange={(e) => setNewFilename(e.target.value)}
-                placeholder="" 
+                placeholder="Nuevo nombre" 
                 required 
               />
-              <label htmlFor="name">Nuevo nombre</label>
             </div>
             <button type="submit">Cargar</button>
           </>

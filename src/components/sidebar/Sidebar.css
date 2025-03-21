@@ -73,13 +73,12 @@
     width: 90%;
 }
 
-.sidebar #upload-file {
-    margin-top: 60px;
-}
-
 .sidebar .recent-title {
-    margin-top: 40px;
-    margin-bottom: 20px;
+    position: sticky;
+    top: 0;
+    background-color: #f0f4f9;
+    z-index: 10; /* Asegura que se mantenga por encima de otros elementos */
+    padding: 20px 10px; /* Espaciado para que se vea bien */
 }
 
 .sidebar .recent-entry {
@@ -151,7 +150,7 @@
 }
 
 .recent {
-    max-height: 300px;
+    max-height: 620px;
     overflow-y: auto;
 }
 
@@ -172,4 +171,14 @@
     align-items: center;
     justify-content: center;
     z-index: 1000; /* Asegura que el modal esté por encima de otros elementos */
+}
+
+.conversation-entry {
+    display: flex;
+    align-items: center; /* Alinea verticalmente el icono y el texto */
+    gap: 10px; /* Espacio entre el icono y el texto */
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 12px 0px;
 }

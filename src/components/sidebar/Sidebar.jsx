@@ -86,11 +86,7 @@ const Sidebar = () => {
                                         <p className="conversation-title">
                                             {getConversationTitle(conversation.messages)}
                                         </p>
-                                        {conversation.messages.length > 0 && (
-                                            <p className="conversation-date">
-                                                {formatDate(conversation.messages[conversation.messages.length - 1].timestamp)}
-                                            </p>
-                                        )}
+                                        
                                     </div>
                                 </div>
                             ))}
